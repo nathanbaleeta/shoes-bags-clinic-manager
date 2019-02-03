@@ -10,7 +10,6 @@ import Grid from "@material-ui/core/Grid";
 import LineChart from "../components/analytics/LineChart";
 import PieChart from "../components/analytics/PieChart";
 import BarChart from "../components/analytics/BarChart";
-import GeoChart from "../components/analytics/GeoChart";
 
 const styles = theme => ({
   root: {

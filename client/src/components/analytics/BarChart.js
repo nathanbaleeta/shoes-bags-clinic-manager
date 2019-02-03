@@ -3,6 +3,13 @@ import Chart from "react-google-charts";
 
 const data = [
   ["Year", "Services", { role: "style" }],
+  ["Jan", 10, "color: blue"],
+  ["Feb", 30, "color: blue"],
+  ["March", 90, "color: blue"],
+  ["April", 100, "color: blue"],
+  ["May", 10, "color: blue"],
+  ["June", 110, "color: blue"],
+  ["July", 20, "color: blue"],
   ["Aug", 10, "color: blue"],
   ["Sept", 14, "color: blue"],
   ["Oct", 16, "color: blue"],
@@ -17,12 +24,7 @@ export default class BarChart extends React.Component {
   render() {
     return (
       <div className="App">
-        <Chart
-          chartType="Bar"
-          //width="100%"
-          //height="400px"
-          data={data}
-        />
+        <Chart chartType="Bar" width="100%" height="400px" data={data} />
       </div>
     );
   }

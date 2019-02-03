@@ -1,19 +1,19 @@
 import React from "react";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
-import API from "./Api";
+import API from "../common/APIUtils";
 import MUIDataTable from "mui-datatables";
 
-import CustomToolbar from "./mui-datatables/CustomToolbar";
+import CustomToolbar from "../mui-datatables/CustomToolbar";
 
-export default class CustomerList extends React.Component {
+export default class InventoryList extends React.Component {
   state = {
     count: 100,
     data: []
   };
 
   componentDidMount() {
-    API.get("customers").then(res => {
+    API.get("inventories").then(res => {
       const data = res.data;
       this.setState({ data });
       console.log(data);
@@ -30,35 +30,28 @@ export default class CustomerList extends React.Component {
         }
       },
       {
-        name: "Phone",
+        name: "Price",
         options: {
           filter: false,
           sort: false
         }
       },
       {
-        name: "Pick up Date",
+        name: "Quantity",
         options: {
           filter: false,
           sort: false
         }
       },
       {
-        name: "Received By",
+        name: "Category",
         options: {
           filter: true,
           sort: false
         }
       },
       {
-        name: "Services Purchased",
-        options: {
-          filter: true,
-          sort: false
-        }
-      },
-      {
-        name: "Created",
+        name: "Stock",
         options: {
           filter: true,
           sort: false
@@ -85,20 +78,25 @@ export default class CustomerList extends React.Component {
       count: count,
       customToolbar: () => {
         return <CustomToolbar />;
+      },
+      onRowsDelete: state => {
+        API.delete(`inventories/${this.state.id}`).then(res => {
+          console.log(res);
+          console.log(res.data);
+        });
       }
     };
 
     return (
       <MUIDataTable
-        title={"Customer list"}
-        data={data.map(customer => {
+        title={"Inventory List"}
+        data={data.map(inventory => {
           return [
-            customer.name,
-            customer.phone,
-            customer.pickUpDate,
-            customer.receivedBy,
-            customer.servicesPurchased,
-            customer.created,
+            <div style={{ color: "darkblue" }}>{inventory.name}</div>,
+            inventory.price,
+            inventory.quantity,
+            inventory.category,
+            inventory.stock,
 
             <IconButton color="primary">
               <DeleteIcon color="primary" />

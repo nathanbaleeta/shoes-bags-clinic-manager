@@ -6,20 +6,21 @@ import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import CloseIcon from "@material-ui/icons/Close";
-import PersonIcon from "@material-ui/icons/MoreVert";
-import MoreVertIcon from "@material-ui/icons/Person";
-import ListItem from "@material-ui/core/ListItem";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import PersonIcon from "@material-ui/icons/Person";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+
+import { Link } from "react-router-dom";
+
+import MenuItem from "@material-ui/core/MenuItem";
+import MenuList from "@material-ui/core/MenuList";
 
 const drawerWidth = 240;
 
@@ -51,16 +52,25 @@ const styles = theme => ({
   hide: {
     display: "none"
   },
+  primary: {
+    color: "white"
+  },
+  icon: {
+    color: "white"
+  },
   drawer: {
     width: drawerWidth,
-    flexShrink: 0
+    flexShrink: 0,
+    color: "inherit"
   },
   drawerPaper: {
-    width: drawerWidth
+    width: drawerWidth,
+    color: "white",
+    background: "#00008B"
   },
   drawerHeader: {
     display: "flex",
-    background: "#8B0000",
+    background: "white",
     alignItems: "center",
     padding: "0 8px",
     ...theme.mixins.toolbar,
@@ -106,7 +116,8 @@ class Header extends React.Component {
         <CssBaseline />
         <AppBar
           position="fixed"
-          style={{ background: "#8B0000" }}
+          color="inherit"
+          style={{ background: "#FFFFFF", borderBottom: "3px solid blue" }}
           className={classNames(classes.appBar, {
             [classes.appBarShift]: open
           })}
@@ -121,8 +132,8 @@ class Header extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography
-              variant="headline"
-              color="inherit"
+              variant="title"
+              color="primary"
               className={classes.grow}
             >
               Shoes & Bags Clinic Manager
@@ -152,33 +163,77 @@ class Header extends React.Component {
           <div className={classes.drawerHeader}>
             <IconButton
               onClick={this.handleDrawerClose}
-              style={{ color: "white" }}
+              style={{ color: "black" }}
             >
               {theme.direction === "ltr" ? <CloseIcon /> : <ChevronRightIcon />}
             </IconButton>
           </div>
           <Divider />
-          <List>
-            {["Customer Sales", "Inventory", "Expenses"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
+
+          <MenuList>
+            <MenuItem component={Link} to="/">
+              <ListItemIcon className={classes.icon}>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText
+                classes={{ primary: classes.primary }}
+                inset
+                primary="Dashboard"
+              />
+            </MenuItem>
+            <MenuItem component={Link} to="/customers">
+              <ListItemIcon className={classes.icon}>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText
+                classes={{ primary: classes.primary }}
+                inset
+                primary="Customer Sales"
+              />
+            </MenuItem>
+
+            <MenuItem component={Link} to="/inventories">
+              <ListItemIcon className={classes.icon}>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText
+                classes={{ primary: classes.primary }}
+                inset
+                primary="Inventory Stock"
+              />
+            </MenuItem>
+            <MenuItem component={Link} to="/expenses">
+              <ListItemIcon className={classes.icon}>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText
+                classes={{ primary: classes.primary }}
+                inset
+                primary="Expenses"
+              />
+            </MenuItem>
+            <MenuItem component={Link} to="/reports">
+              <ListItemIcon className={classes.icon}>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText
+                classes={{ primary: classes.primary }}
+                inset
+                primary="Reports"
+              />
+            </MenuItem>
+            <MenuItem component={Link} to="/logout">
+              <ListItemIcon className={classes.icon}>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText
+                classes={{ primary: classes.primary }}
+                inset
+                primary="Logout"
+              />
+            </MenuItem>
+          </MenuList>
           <Divider />
-          <List>
-            {["Reports", "Settings", "Logout"].map((text, index) => (
-              <ListItem button key={text}>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
-            ))}
-          </List>
         </Drawer>
         <main
           className={classNames(classes.content, {

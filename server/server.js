@@ -2,7 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+
 const customerRouter = require("./routes/customerRouter");
+const expenseRouter = require("./routes/expenseRouter");
+const inventoryRouter = require("./routes/inventoryRouter");
 //const craftsmanRouter = require("./routes/craftsmanRouter");
 
 const app = express();
@@ -23,6 +26,8 @@ app.use(cors());
 
 // API routes
 app.use("/api/customers", customerRouter);
+app.use("/api/expenses", expenseRouter);
+app.use("/api/inventories", inventoryRouter);
 //app.use("/api/craftsmen", craftsmanRouter);
 
 // Running the server on preset port

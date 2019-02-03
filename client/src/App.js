@@ -1,8 +1,16 @@
 import React from "react";
 import { CssBaseline, withStyles } from "@material-ui/core";
+import { Switch, Route } from "react-router-dom";
 
-import Header from "./components/Header";
+import Header from "./components/Layout/Header";
 import Dashboard from "./pages/Dashboard";
+import SignIn from "./pages/SignIn";
+
+import CustomerList from "./components/Customer/CustomerList";
+import InventoryList from "./components/Inventory/InventoryList";
+import ExpenseList from "./components/Expense/ExpenseList";
+
+import CustomerReport from "./components/Customer/CustomerReport";
 
 const styles = theme => ({
   main: {
@@ -18,7 +26,14 @@ const App = ({ classes }) => (
     <CssBaseline />
     <Header />
     <main className={classes.main}>
-      <Dashboard />
+      <Switch>
+        <Route exact path="/" component={Dashboard} />
+        <Route path="/customers" component={CustomerList} />
+        <Route path="/inventories" component={InventoryList} />
+        <Route path="/expenses" component={ExpenseList} />
+        <Route path="/reports" component={CustomerReport} />
+        <Route path="/logout" component={SignIn} />
+      </Switch>
     </main>
   </React.Fragment>
 );
