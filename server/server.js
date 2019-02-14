@@ -6,6 +6,7 @@ const cors = require("cors");
 const customerRouter = require("./routes/customerRouter");
 const expenseRouter = require("./routes/expenseRouter");
 const inventoryRouter = require("./routes/inventoryRouter");
+const userRouter = require("./routes/userRouter");
 //const craftsmanRouter = require("./routes/craftsmanRouter");
 
 const app = express();
@@ -28,6 +29,7 @@ app.use(cors());
 app.use("/api/customers", customerRouter);
 app.use("/api/expenses", expenseRouter);
 app.use("/api/inventories", inventoryRouter);
+app.use("/api/users", userRouter);
 //app.use("/api/craftsmen", craftsmanRouter);
 
 // Running the server on preset port

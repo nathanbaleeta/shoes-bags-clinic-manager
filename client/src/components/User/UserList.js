@@ -1,45 +1,47 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
-import Avatar from "@material-ui/core/Avatar";
-import DeleteIcon from "@material-ui/icons/Delete";
-import LabelIcon from "@material-ui/icons/Label";
+import EditIcon from "@material-ui/icons/Edit";
 import API from "../common/APIUtils";
 import MUIDataTable from "mui-datatables";
-
 import CustomToolbar from "../mui-datatables/CustomToolbar";
 
-import pink from "@material-ui/core/colors/pink";
-import green from "@material-ui/core/colors/green";
+import Avatar from "@material-ui/core/Avatar";
+import deepOrange from "@material-ui/core/colors/deepOrange";
+import deepPurple from "@material-ui/core/colors/deepPurple";
 
 const styles = {
   avatar: {
     margin: 10
   },
-  pinkAvatar: {
+  orangeAvatar: {
     margin: 10,
     color: "#fff",
-    backgroundColor: pink[500]
+    backgroundColor: deepOrange[500]
   },
-  greenAvatar: {
+  purpleAvatar: {
     margin: 10,
     color: "#fff",
-    backgroundColor: green[500]
+    backgroundColor: deepPurple[500]
   }
 };
 
-class InventoryList extends React.Component {
+class UserList extends React.Component {
   state = {
     count: 100,
     data: []
   };
 
   componentDidMount() {
-    API.get("inventories").then(res => {
+    API.get("users").then(res => {
       const data = res.data;
       this.setState({ data });
       console.log(data);
     });
+  }
+
+  CapitalizeInitials(str1, str2) {
+    return str1.charAt(0).toUpperCase() + str2.charAt(0).toUpperCase();
   }
 
   render() {
@@ -49,41 +51,34 @@ class InventoryList extends React.Component {
         name: "",
         options: {
           filter: false,
+          sort: false
+        }
+      },
+      {
+        name: "Firstname",
+        options: {
+          filter: false,
           sort: true
         }
       },
       {
-        name: "Name",
+        name: "Lastname",
         options: {
-          filter: true,
+          filter: false,
           sort: true
         }
       },
       {
-        name: "Price",
+        name: "Username",
         options: {
           filter: false,
-          sort: false
+          sort: true
         }
       },
       {
-        name: "Quantity",
+        name: "Password",
         options: {
           filter: false,
-          sort: false
-        }
-      },
-      {
-        name: "Category",
-        options: {
-          filter: true,
-          sort: false
-        }
-      },
-      {
-        name: "Stock",
-        options: {
-          filter: true,
           sort: false
         }
       },
@@ -110,7 +105,7 @@ class InventoryList extends React.Component {
         return <CustomToolbar />;
       },
       onRowsDelete: state => {
-        API.delete(`inventories/${this.state.id}`).then(res => {
+        API.delete(`users/${this.state.id}`).then(res => {
           console.log(res);
           console.log(res.data);
         });
@@ -119,20 +114,19 @@ class InventoryList extends React.Component {
 
     return (
       <MUIDataTable
-        title={"Inventory List"}
-        data={data.map(inventory => {
+        title={"User List"}
+        data={data.map(user => {
           return [
-            <Avatar className={classes.pinkAvatar}>
-              <LabelIcon />
+            <Avatar className={classes.purpleAvatar}>
+              {this.CapitalizeInitials(user.firstname, user.lastname)}
             </Avatar>,
-            <div style={{ color: "darkblue" }}>{inventory.name}</div>,
-            inventory.price,
-            inventory.quantity,
-            inventory.category,
-            inventory.stock,
+            user.firstname,
+            user.lastname,
+            <div style={{ color: "darkblue" }}>{user.username}</div>,
+            user.password,
 
             <IconButton color="primary">
-              <DeleteIcon color="primary" />
+              <EditIcon color="primary" />
             </IconButton>
           ];
         })}
@@ -143,4 +137,4 @@ class InventoryList extends React.Component {
   }
 }
 
-export default withStyles(styles)(InventoryList);
+export default withStyles(styles)(UserList);

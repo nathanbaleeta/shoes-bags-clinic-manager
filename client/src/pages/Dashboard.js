@@ -9,6 +9,7 @@ import PieChart from "../components/analytics/PieChart";
 import BarChart from "../components/analytics/BarChart";
 import Gauge from "../components/analytics/Gauge";
 import ScatterChart from "../components/analytics/ScatterChart";
+import LinearDeterminate from "../components/analytics/LinearDeterminate";
 
 const styles = theme => ({
   root: {
@@ -39,7 +40,11 @@ class Dashboard extends React.Component {
                 Daily Performance
               </Typography>
 
-              <Gauge />
+              <LinearDeterminate />
+
+              <br />
+
+              {/*  <Gauge /> */}
 
               <Typography
                 variant="body2"

@@ -191,6 +191,16 @@ class Header extends React.Component {
                 primary="Customer Sales"
               />
             </MenuItem>
+            <MenuItem component={Link} to="/invoice">
+              <ListItemIcon className={classes.icon}>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText
+                classes={{ primary: classes.primary }}
+                inset
+                primary="Generate Invoice"
+              />
+            </MenuItem>
 
             <MenuItem component={Link} to="/inventories">
               <ListItemIcon className={classes.icon}>
@@ -220,6 +230,16 @@ class Header extends React.Component {
                 classes={{ primary: classes.primary }}
                 inset
                 primary="Reports"
+              />
+            </MenuItem>
+            <MenuItem component={Link} to="/accounts">
+              <ListItemIcon className={classes.icon}>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText
+                classes={{ primary: classes.primary }}
+                inset
+                primary="Accounts"
               />
             </MenuItem>
             <MenuItem component={Link} to="/logout">

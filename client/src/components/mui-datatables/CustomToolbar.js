@@ -14,6 +14,7 @@ import { Switch, Route } from "react-router-dom";
 import CreateCustomer from "../Customer/CreateCustomer";
 import CreateExpense from "../Expense/CreateExpense";
 import CreateInventory from "../Inventory/CreateInventory";
+import CreateUser from "../User/CreateUser";
 
 const styles = theme => ({
   iconButton: {},
@@ -58,6 +59,7 @@ class CustomToolbar extends React.Component {
               <Route path="/customers" component={CreateCustomer} />
               <Route path="/inventories" component={CreateInventory} />
               <Route path="/expenses" component={CreateExpense} />
+              <Route path="/accounts" component={CreateUser} />
             </Switch>
           </DialogContent>
           <DialogActions>

@@ -9,8 +9,10 @@ import SignIn from "./pages/SignIn";
 import CustomerList from "./components/Customer/CustomerList";
 import InventoryList from "./components/Inventory/InventoryList";
 import ExpenseList from "./components/Expense/ExpenseList";
+import UserList from "./components/User/UserList";
 
 import CustomerReport from "./components/Customer/CustomerReport";
+import GenerateInvoice from "./components/Customer/GenerateInvoice";
 
 const styles = theme => ({
   main: {
@@ -29,9 +31,11 @@ const App = ({ classes }) => (
       <Switch>
         <Route exact path="/" component={Dashboard} />
         <Route path="/customers" component={CustomerList} />
+        <Route path="/invoice" component={GenerateInvoice} />
         <Route path="/inventories" component={InventoryList} />
         <Route path="/expenses" component={ExpenseList} />
         <Route path="/reports" component={CustomerReport} />
+        <Route path="/accounts" component={UserList} />
         <Route path="/logout" component={SignIn} />
       </Switch>
     </main>

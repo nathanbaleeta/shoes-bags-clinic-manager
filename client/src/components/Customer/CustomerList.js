@@ -1,4 +1,5 @@
 import React from "react";
+import { withStyles } from "@material-ui/core/styles";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import API from "../common/APIUtils";
@@ -6,7 +7,27 @@ import MUIDataTable from "mui-datatables";
 
 import CustomToolbar from "../mui-datatables/CustomToolbar";
 
-export default class CustomerList extends React.Component {
+import Avatar from "@material-ui/core/Avatar";
+import deepOrange from "@material-ui/core/colors/deepOrange";
+import deepPurple from "@material-ui/core/colors/deepPurple";
+
+const styles = {
+  avatar: {
+    margin: 10
+  },
+  orangeAvatar: {
+    margin: 10,
+    color: "#fff",
+    backgroundColor: deepOrange[500]
+  },
+  purpleAvatar: {
+    margin: 10,
+    color: "#fff",
+    backgroundColor: deepPurple[500]
+  }
+};
+
+class CustomerList extends React.Component {
   state = {
     count: 100,
     data: []
@@ -20,8 +41,20 @@ export default class CustomerList extends React.Component {
     });
   }
 
+  CapitalizeInitial(str) {
+    return str.charAt(0).toUpperCase();
+  }
+
   render() {
+    const { classes } = this.props;
     const columns = [
+      {
+        name: "",
+        options: {
+          filter: false,
+          sort: false
+        }
+      },
       {
         name: "Name",
         options: {
@@ -99,6 +132,9 @@ export default class CustomerList extends React.Component {
         title={"Customer list"}
         data={data.map(customer => {
           return [
+            <Avatar className={classes.purpleAvatar}>
+              {this.CapitalizeInitial(customer.name)}
+            </Avatar>,
             <div style={{ color: "darkblue" }}>{customer.name}</div>,
             customer.phone,
             customer.pickUpDate,
@@ -117,3 +153,5 @@ export default class CustomerList extends React.Component {
     );
   }
 }
+
+export default withStyles(styles)(CustomerList);
